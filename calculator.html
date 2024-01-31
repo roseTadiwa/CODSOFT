@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic Calculator</title>
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <input type="text" id="result" disabled>
+    </div>
+    <div class="buttons">
+      <button class="operator" id="add">+</button>
+      <button class="operator" id="subtract">-</button>
+      <button class="operator" id="multiply">*</button>
+      <button class="operator" id="divide">/</button>
+      <button class="number" id="seven">7</button>
+      <button class="number" id="eight">8</button>
+      <button class="number" id="nine">9</button>
+      <button class="number" id="four">4</button>
+      <button class="number" id="five">5</button>
+      <button class="number" id="six">6</button>
+      <button class="number" id="one">1</button>
+      <button class="number" id="two">2</button>
+      <button class="number" id="three">3</button>
+      <button class="number" id="zero">0</button>
+      <button id="clear">C</button>
+      <button id="equal">=</button>
+    </div>
+  </div>
+  
+  <script >
+    document.addEventListener("DOMContentLoaded", function() {
+  
+  var display = document.getElementById("result");
+
+  
+  var numberButtons = document.getElementsByClassName("number");
+  for (var i = 0; i < numberButtons.length; i++) {
+    numberButtons[i].addEventListener("click", function() {
+      display.value += this.textContent;
+    });
+  }
+
+  
+  var operatorButtons = document.getElementsByClassName("operator");
+  for (var i = 0; i < operatorButtons.length; i++) {
+    operatorButtons[i].addEventListener("click", function() {
+      display.value += " " + this.textContent + " ";
+    });
+  }
+
+  
+  var clearButton = document.getElementById("clear");
+  clearButton.addEventListener("click", function() {
+    display.value = "";
+  });
+
+  // Equal button
+  var equalButton = document.getElementById("equal");
+  equalButton.addEventListener("click", function() {
+    var expression = display.value;
+    var operands = expression.split(" ");
+    var result = parseFloat(operands[0]);
+    
+    for (var i = 1; i < operands.length; i += 2) {
+      var operator = operands[i];
+      var operand = parseFloat(operands[i + 1]);
+
+      if (operator === "+") {
+        result += operand;
+      } else if (operator === "-") {
+        result -= operand;
+      } else if (operator === "*") {
+        result *= operand;
+      } else if (operator === "/") {
+        result /= operand;
+      }
+    }
+
+    display.value = result;
+  });
+});
+
+  </script>
+</body>
+</html>
